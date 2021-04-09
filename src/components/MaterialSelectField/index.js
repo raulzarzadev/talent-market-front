@@ -29,7 +29,7 @@ const Placeholder = ({ children }) => {
 export default function MaterialSelectField({
   placeholder,
   value = '',
-  onChange,
+  onChange = () => {},
   options = [],
   toplabel,
   ...rest
@@ -99,12 +99,12 @@ MaterialSelectField.propTypes = {
   placeholder: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(
+  /* options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })
-  ).isRequired,
+  ).isRequired, */
   toplabel: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 }

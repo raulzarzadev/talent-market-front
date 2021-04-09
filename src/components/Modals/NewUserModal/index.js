@@ -34,7 +34,7 @@ export default function NewUserModal({ open, handleClose }) {
   const [loading, setLoading] = useState(false)
   const handleSubmit = () => {
     setLoading(true)
-    postFethc('/user', form)
+    postFethc('/talent', form)
       .then((res) => {
         console.log(res)
         setForm({})
@@ -54,7 +54,7 @@ export default function NewUserModal({ open, handleClose }) {
   useEffect(() => {
     if (canBeAssignTo) {
       const assigments = canBeAssignTo.map((assignedTo) => {
-        return fetching(`/user?rol=${assignedTo}`)
+        return fetching(`/talent?rol=${assignedTo}`)
       })
       Promise.all(assigments).then((res) =>
         setCanBeAssignToUser(normalizeToSelectOptions(res?.flat()))

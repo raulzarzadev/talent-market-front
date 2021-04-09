@@ -25,13 +25,40 @@ export default function SearchBar() {
   const classes = useStyles()
   return (
     <div className={classes.searchBar}>
-      <MaterialTextField placeholder="Quick Search..." />
+      <MaterialTextField
+        name="input-name"
+        value=""
+        toplabel=""
+        onChange={() => {}}
+        placeholder="Quick Search..."
+      />
       <Divider />
-      <MaterialSelectField placeholder="All Entries" options={SELECTDATA} />
+      <MaterialSelectField
+        name="input-name"
+        value=""
+        toplabel=""
+        onChange={() => {}}
+        placeholder="All Entries"
+        options={SELECTDATA}
+      />
       <Divider />
-      <MaterialSelectField placeholder="Industry" options={SELECTDATA} />
+      <MaterialSelectField
+        name="input-name"
+        value=""
+        toplabel=""
+        onChange={() => {}}
+        placeholder="Industry"
+        options={SELECTDATA}
+      />
       <Divider />
-      <MaterialSelectField placeholder="Location" options={SELECTDATA} />
+      <MaterialSelectField
+        name="input-name"
+        value=""
+        toplabel=""
+        onChange={() => {}}
+        placeholder="Location"
+        options={SELECTDATA}
+      />
       <div className={classes.searchButton}>
         <IconButton size="small">
           <SearchIcon style={{ color: '#fff' }} />

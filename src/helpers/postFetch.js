@@ -1,4 +1,4 @@
-export default async function postFethc(url, data) {
+export default async function postFetch(url, data) {
   const api = process.env.NEXT_PUBLIC_URL_API
   return await fetch(`${api}${url}`, {
     method: 'POST',

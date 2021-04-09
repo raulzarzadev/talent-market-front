@@ -8,7 +8,7 @@ export default function UserPage({ user, recruiter = false }) {
   const [assignedTo, setAssignedTo] = useState(null)
   useEffect(() => {
     if (user?.assignedTo) {
-      fetching(`/user?_id=${user.assignedTo}`).then((res) => {
+      fetching(`/talent?_id=${user.assignedTo}`).then((res) => {
         setAssignedTo(res[0])
       })
     } else {
@@ -21,7 +21,23 @@ export default function UserPage({ user, recruiter = false }) {
   const [assignments, setAssignments] = useState([])
   useEffect(() => {
     if (user) {
-      fetching(`/user?assignedTo=${user._id}`).then(setAssignments)
+      fetching(`/talent?assignedTo=${user._id}`).then((res) => {
+        // just get diference bettewn recruits and bosses
+        const bosses = res.filter((item) => !item.rol.includes('recruit'))
+        const recruiters = res.filter((item) => item.rol.includes('recruit'))
+        setAssignments(bosses)
+        setRecruiters(recruiters)
+      })
+    }
+  }, [user])
+  const [recruiters, setRecruiters] = useState([])
+  console.log(recruiters, assignments)
+   
+
+  useEffect(() => {
+    if (recruiter) {
+      // if is a recruiter overwrite recruites 
+      fetching(`/talent?recruitedBy=${user._id}`).then(setRecruiters)
     }
   }, [user])
 
@@ -39,6 +55,7 @@ export default function UserPage({ user, recruiter = false }) {
       user={user}
       assignedTo={assignedTo}
       assignments={assignments}
+      recruiters={recruiters}
       recruiter={recruiter}
     />
   )

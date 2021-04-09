@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 export default function Recruiters() {
   const [users, setUsers] = useState([])
   useEffect(() => {
-    fetching('/user?rol=recruiter').then(setUsers)
+    fetching('/talent?rol=recruiter').then(setUsers)
   }, [])
   return (
     <Layout Component={SelectUser} users={users} title="Recruiters" />

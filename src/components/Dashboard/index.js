@@ -12,7 +12,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import WorkIcon from '@material-ui/icons/Work'
 import MapIcon from '@material-ui/icons/Map'
 
-import SearchBar from '@comps/SerchBar'
+import SearchBar from '@comps/SearchBar'
 import Footer from '@comps/Footer'
 import Link from '@comps/Link'
 import DataUsageIcon from '@material-ui/icons/DataUsage'

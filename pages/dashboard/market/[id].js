@@ -10,9 +10,9 @@ export default function MarketNew() {
   } = useRouter()
   useEffect(() => {
     if (id) {
-      fetching(`/candidate/${id}`).then(setTalent)
+      fetching(`/talent/${id}`).then(setTalent)
     }
   }, [id])
   console.log(talent)
-  return <Layout Component={NewTalent} talent={talent} />
+  return <Layout Component={NewTalent} title='Edit Talent' talent={talent} />
 }

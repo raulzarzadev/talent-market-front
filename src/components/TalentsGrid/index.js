@@ -59,7 +59,7 @@ const rows = [
   },
 ]
 
-export default function TalentGrid({ paddingTable }) {
+export default function TalentGrid({ paddingTable, talents }) {
   const classes = useStyles()
   return (
     <Grid container style={{ paddingLeft: 20 }}>
@@ -86,19 +86,19 @@ export default function TalentGrid({ paddingTable }) {
         <Grid item xs={12} sm={true}></Grid>
       </Grid>
       <Grid container item className={classes.content}>
-        {rows.map(
+        {talents.map(
           ({
-            name,
-            industry,
-            position,
-            phone,
-            salary,
-            location,
-            profession,
-            image,
-            id,
+            image = '/assets/Antony.png',
+            name = 'Antony Gonzalez',
+            profession = 'Construct Manager',
+            industry = 'Construction',
+            position = 'Project Manager',
+            phone = '+01 637 12345678',
+            salary = '$80k',
+            location = 'NJ',
+            _id
           }) => (
-            <Grid key={id} container item className={classes.row}>
+            <Grid key={_id} container item className={classes.row}>
               <Grid
                 className={classes.cellAvatar}
                 style={{ paddingLeft: paddingTable }}
@@ -129,7 +129,7 @@ export default function TalentGrid({ paddingTable }) {
                 <Typography variant="caption">{location}</Typography>
               </Grid>
               <Grid item xs={12} sm={true} className={classes.cell}>
-                <ButtonLink variant="outlined" href={`/dashboard/market/${id}`}>
+                <ButtonLink variant="outlined" href={`/dashboard/market/${_id}`}>
                   View Profile
                 </ButtonLink>
               </Grid>

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 export default function Principals() {
   const [users, setUsers] = useState([])
   useEffect(() => {
-    fetching('/user?rol=principal').then(setUsers)
+    fetching('/talent?rol=principal').then(setUsers)
   }, [])
   return <Layout Component={SelectUser} users={users} title='Principals'/>
 }

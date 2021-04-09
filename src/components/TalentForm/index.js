@@ -1,7 +1,6 @@
 import WriteTalentProfile from '@comps/WriteTalentProfile'
 import SendToCoachModal from '@comps/Modals/SendToCoachModal'
 import { Avatar, Box, Button, Grid, makeStyles } from '@material-ui/core'
-import fetching from '@src/helpers/fetching'
 import theme from '@src/theme'
 import { useEffect, useState } from 'react'
 import postFetch from '@src/helpers/postFetch'
@@ -30,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function TalentForm({ talent }) {
+export default function TalentForm({ talent  }) {
   const classes = useStyles()
 
   useEffect(() => {
@@ -52,11 +51,13 @@ export default function TalentForm({ talent }) {
   }
   const handleSendCouch = () => {
     handleOpenSendCoachModal()
-    postFetch('/candidate', form).then((res) => console.log(res))
+    postFetch('/talent', { rol: ['recruit'], ...form }).then((res) =>
+      console.log(res)
+    )
     console.log('sendCouch')
   }
   const handleSaveDraft = () => {
-    postFetch('/candidate', form)
+    postFetch('/talent', { rol: ['recruit'], ...form })
     console.log('save draft')
   }
   const handleDescart = () => {

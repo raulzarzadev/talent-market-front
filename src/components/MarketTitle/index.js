@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }))
-export default function MarketTitle({ title = 'title' }) {
+export default function MarketTitle({ title = 'New Talent' }) {
   const classes = useStyles()
   return (
     <div className={classes.marketTitle}>

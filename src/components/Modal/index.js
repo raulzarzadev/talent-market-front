@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Modal({ handleClose, open = false, children }) {
+export default function Modal({ handleClose, open = false, children, title }) {
   const classes = useStyles()
 
   return (
@@ -47,7 +47,7 @@ export default function Modal({ handleClose, open = false, children }) {
     >
       <Paper className={classes.paper}>
         <header className={classes.header}>
-          <Typography variant="h6">Add to coach</Typography>
+          <Typography variant="h6">{title}</Typography>
           <IconButton color="inherit" onClick={handleClose} size="small">
             <Close />
           </IconButton>
