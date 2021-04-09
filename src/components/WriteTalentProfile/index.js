@@ -14,12 +14,14 @@ const inputs = [
     label: 'First Name',
     placeholder: 'Text',
     inputName: 'name',
+    disabled: false,
   },
   {
     type: 'text',
     label: 'Last Name',
     placeholder: 'Text',
     inputName: 'lastName',
+    disabled: true,
   },
   {
     type: 'select',
@@ -27,12 +29,14 @@ const inputs = [
     label: 'Status',
     placeholder: 'Select',
     inputName: 'status',
+    disabled: true,
   },
   {
     type: 'text',
     label: 'Wish Salary',
     placeholder: 'Text',
     inputName: 'wishSalary',
+    disabled: true,
   },
   {
     type: 'select',
@@ -40,19 +44,30 @@ const inputs = [
     label: 'Functional Title',
     placeholder: 'Text',
     inputName: 'funtionalTitle',
+    disabled: true,
   },
-  { type: 'text', label: 'Title', placeholder: 'Text' },
+  {
+    type: 'text',
+    label: 'Title',
+    placeholder: 'Text',
+    disabled: true,
+    inputName: 'title',
+  },
   {
     type: 'select',
     selectOptions: [{ label: 'Senior', value: 'senior' }],
     label: 'Seniority',
     placeholder: 'Select',
+    disabled: true,
+    inputName: 'seniority',
   },
   {
     type: 'select',
     selectOptions: [{ label: 'Construction', value: 'construction' }],
     label: 'Industry',
     placeholder: 'Select',
+    disabled: true,
+    inputName: 'industry',
   },
 ]
 const inputFiles = [
@@ -75,7 +90,6 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     padding: theme.spacing(2),
   },
-  
 }))
 export default function WriteTalentProfile({
   handleChange,
@@ -88,7 +102,14 @@ export default function WriteTalentProfile({
     <>
       <Grid component={Paper} container className={classes.paper}>
         {inputs.map(
-          ({ inputName, type, selectOptions, label, placeholder }) => (
+          ({
+            inputName,
+            type,
+            selectOptions,
+            label,
+            placeholder,
+            disabled,
+          }) => (
             <Grid
               key={label}
               item
@@ -99,6 +120,7 @@ export default function WriteTalentProfile({
             >
               {type === 'select' && (
                 <MaterialSelectField
+                  disabled={disabled}
                   name={inputName}
                   onChange={handleChange}
                   placeholder={placeholder}
@@ -109,6 +131,7 @@ export default function WriteTalentProfile({
               )}
               {type === 'text' && (
                 <MaterialTextField
+                  disabled={disabled}
                   name={inputName}
                   value={form[inputName] || ''}
                   onChange={handleChange}

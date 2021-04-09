@@ -11,7 +11,7 @@ export default function User() {
   } = useRouter()
 
   useEffect(() => {
-    fetching(`/user?_id=${id}`).then((res) => setUser(res[0]))
+    fetching(`/talent?_id=${id}`).then((res) => setUser(res[0]))
   }, [id])
   const isRecruiter = user?.rol?.includes('recruiter')
 

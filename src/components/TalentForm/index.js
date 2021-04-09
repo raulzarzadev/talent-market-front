@@ -52,6 +52,7 @@ export default function TalentForm({ talent }) {
   }
   const handleSendCouch = () => {
     handleOpenSendCoachModal()
+    postFetch('/candidate', form).then((res) => console.log(res))
     console.log('sendCouch')
   }
   const handleSaveDraft = () => {
@@ -85,6 +86,7 @@ export default function TalentForm({ talent }) {
             variant="contained"
             color="primary"
             fullWidth
+            disabled
           >
             Save as draft
           </Button>
@@ -147,7 +149,7 @@ export default function TalentForm({ talent }) {
         handleClose={handleOpenSendCoachModal}
         handleSend={handleSendCouch}
         handleChange={handleChange}
-        value={form.coach}
+        form={form}
       />
     </div>
   )

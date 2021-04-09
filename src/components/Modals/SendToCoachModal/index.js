@@ -10,13 +10,21 @@ export default function SendToCoachModal({
   handleClose,
   handleChange,
   handleSend,
-  value,
+  form,
 }) {
   const [coaches, setCoaches] = useState([])
   useEffect(() => {
-    fetching('/user?rol=coach').then((res) => {
+    fetching('/talent?rol=coach').then((res) => {
       if (res) {
         setCoaches(normalizeToSelectOptions(res))
+      }
+    })
+  }, [])
+  const [recruiters, setRecruiters] = useState([])
+  useEffect(() => {
+    fetching('/talent?rol=recruiter').then((res) => {
+      if (res) {
+        setRecruiters(normalizeToSelectOptions(res))
       }
     })
   }, [])
@@ -32,10 +40,20 @@ export default function SendToCoachModal({
         <Box mt={5}>
           <MaterialSelectField
             placeholder="Select"
+            options={recruiters}
+            onChange={handleChange}
+            value={form.recruitedBy || ''}
+            name="recruitedBy"
+            toplabel="This candidate was recruited by"
+          />
+        </Box>
+        <Box mt={5}>
+          <MaterialSelectField
+            placeholder="Select"
             options={coaches}
             onChange={handleChange}
-            value={value || ''}
-            name="coach"
+            value={form.assignedTo || ''}
+            name="assignedTo"
             toplabel="Select a coach to send this candidate"
           />
         </Box>
