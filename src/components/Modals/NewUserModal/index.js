@@ -1,24 +1,29 @@
 import MaterialSelectField from '@comps/MaterialSelectField'
 import MaterialTextField from '@comps/MaterialTextField'
 import Modal from '@comps/Modal'
-import { Box, Button } from '@material-ui/core'
+import { Box, Button, Typography } from '@material-ui/core'
 import postFethc from '@src/helpers/postFetch'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Alert from '@material-ui/lab/Alert'
+import fetching from '@src/helpers/fetching'
+import normalizeToSelectOptions from '@src/helpers/normalizeToSelectOptions'
 
 export default function NewUserModal({ open, handleClose }) {
   const roles = [
     {
       value: 'principal',
       label: 'Principal',
+      canBeAssignTo: [],
     },
     {
       value: 'coach',
       label: 'Coach',
+      canBeAssignTo: ['principal'],
     },
     {
       value: 'recruiter',
       label: 'Recruiter',
+      canBeAssignTo: ['coach'],
     },
   ]
 
@@ -38,9 +43,28 @@ export default function NewUserModal({ open, handleClose }) {
       })
       .catch((e) => setError(true))
   }
+
+  const [canBeAssignTo, setCanBeAssignTo] = useState([])
+  useEffect(() => {
+    const rol = roles.find((rol) => rol?.value === form?.rol)
+    setCanBeAssignTo(rol?.canBeAssignTo)
+  }, [form?.rol])
+
+  const [canBeAssignToUser, setCanBeAssignToUser] = useState([])
+  useEffect(() => {
+    if (canBeAssignTo) {
+      const assigments = canBeAssignTo.map((assignedTo) => {
+        return fetching(`/user?rol=${assignedTo}`)
+      })
+      Promise.all(assigments).then((res) =>
+        setCanBeAssignToUser(normalizeToSelectOptions(res?.flat()))
+      )
+    }
+  }, [canBeAssignTo])
+
   const [error, setError] = useState(false)
   const [success, setSuccess] = useState(false)
-
+  console.log(canBeAssignToUser)
   const isDisabled = !form?.name || !form?.rol || loading
   return (
     <Modal open={open} handleClose={handleClose} title="New User">
@@ -69,6 +93,20 @@ export default function NewUserModal({ open, handleClose }) {
               onChange={handleChange}
               toplabel="User Rol"
             />
+          </Box>
+          <Box m={2}>
+            {canBeAssignToUser.length ? (
+              <MaterialSelectField
+                placeholder="Select"
+                value={form?.assignedTo || ''}
+                options={canBeAssignToUser}
+                name="assignedTo"
+                onChange={handleChange}
+                toplabel="Assign To"
+              />
+            ) : (
+              <Typography variant="h5">Anyone yet</Typography>
+            )}
           </Box>
           <Box textAlign="end" m={2}>
             {success && (

@@ -2,6 +2,7 @@ import MaterialSelectField from '@comps/MaterialSelectField'
 import Modal from '@comps/Modal'
 import { Box, Button } from '@material-ui/core'
 import fetching from '@src/helpers/fetching'
+import normalizeToSelectOptions from '@src/helpers/normalizeToSelectOptions'
 import { useEffect, useState } from 'react'
 
 export default function SendToCoachModal({
@@ -15,12 +16,7 @@ export default function SendToCoachModal({
   useEffect(() => {
     fetching('/user?rol=coach').then((res) => {
       if (res) {
-        const normalizedOptinos = res.reduce((acc, curr) => {
-          const userOption = { label: curr.name, value: curr._id }
-          return [...acc, userOption]
-        }, [])
-        console.log(normalizedOptinos)
-        setCoaches(normalizedOptinos)
+        setCoaches(normalizeToSelectOptions(res))
       }
     })
   }, [])
