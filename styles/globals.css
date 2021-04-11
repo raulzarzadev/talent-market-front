@@ -30,13 +30,27 @@ a {
   flex-direction: column;
 }
 
-.marker > .mapboxgl-popup-content {
-  padding: 0;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 1.4rem;
-  text-transform: uppercase;
-  cursor: pointer;
+
+
+.mapbox-custom-marker {
+  border-radius: 5px;
+  min-width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  font-weight: 900;
+  font-size: 1rem;
 }
-.marker > .mapboxgl-popup-tip {
+
+.mapbox-custom-marker:hover {
+  max-width: 150px;
+  text-align: center;
+  z-index: 1;
+  text-transform: capitalize;
 }
+
+/* .marker-3 {
+  border-radius: 20%;
+  background-color: gray;
+} */

@@ -6,10 +6,10 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core'
-import DEFAULT_LOCATION from 'HARD-DATA/DEFAULT_LOCATION'
-import { useEffect } from 'react'
+import theme from '@src/theme'
+import { useState } from 'react'
+import Map from './Map'
 
-var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js')
 const headerHeight = 50
 const useStyles = makeStyles((theme) => ({
   mapPage: {
@@ -69,22 +69,15 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: theme.palette.background.ligth,
     },
+    '&[selected=true]': {
+      background: 'red',
+    },
   },
 
   contact: { textAlign: 'end' },
-  map: {
-    marginTop: headerHeight,
-    margin: '0 auto',
-  },
 }))
 
-mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
-
-const markStyles = `
-color: #000;
-padding: 8px;
-`
-export default function Map({ talents }) {
+export default function TalentMapList({ talents = [] }) {
   const classes = useStyles()
 
   const talentsWithValidLocation = talents?.filter(
@@ -94,31 +87,14 @@ export default function Map({ talents }) {
     (talent) => talent?.location?.length !== 2
   )
   console.log(talentsWithValidLocation)
-  useEffect(() => {
-    var map = new mapboxgl.Map({
-      container: 'map-container',
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: DEFAULT_LOCATION,
-      zoom: 5,
-    })
-    map.on('load', () => {
-      talentsWithValidLocation.map((talent) => {
-        const mark = `<div  style='${markStyles}'>${`${talent.name[0]} ${talent.name[3]}`}</div>`
-
-        const popup = new mapboxgl.Popup({
-          closeButton: false,
-          closeOnClick: false,
-          className: 'marker', // in global classes
-        })
-          .setLngLat(talent.location)
-          .setHTML(mark)
-          .addTo(map)
-      })
-    })
-  }, [talentsWithValidLocation.length])
 
   const handleChangeFilter = (filter) => {
     console.log('change filter', filter)
+  }
+  const [talentSelectedLocation, setTalentSelectedLocation] = useState('')
+  const handleSelectTalent = (location) => {
+    console.log(location)
+    setTalentSelectedLocation(location)
   }
 
   return (
@@ -166,8 +142,15 @@ export default function Map({ talents }) {
           <Typography
             key={talent._id}
             className={classes.talent}
+            style={{
+              backgroundColor:
+                talentSelectedLocation === talent.location
+                  ? theme.palette.background.ligth
+                  : theme.palette.background.default,
+            }}
             component="div"
             variant="caption"
+            onMouseOver={() => handleSelectTalent(talent.location)}
           >
             <div className={classes.info}>
               <Box fontWeight={600}>{talent?.name}</Box>
@@ -205,14 +188,12 @@ export default function Map({ talents }) {
           </Typography>
         ))}
       </div>
-      {/* MAP */}
-      <div
-        className={classes.map}
-        style={{ width: '90%', height: 700, border: '1px solid' }}
-        id="map-container"
-      ></div>
+      {/* <MAP> */}
+      <Map
+        markers={talentsWithValidLocation}
+        talentSelectedLocation={talentSelectedLocation}
+        handleSelectTalent={handleSelectTalent}
+      />
     </div>
   )
 }
-
-const MARK = <div>hola</div>

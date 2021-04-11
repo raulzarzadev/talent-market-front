@@ -4,6 +4,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import Link from '@comps/Link'
 import MarketTitle from '@comps/MarketTitle'
 
+
 const paddingMarket = '3rem'
 const paddingTable = 40
 const useStyles = makeStyles((theme) => ({
