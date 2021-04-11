@@ -69,9 +69,6 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: theme.palette.background.ligth,
     },
-    '&[selected=true]': {
-      background: 'red',
-    },
   },
 
   contact: { textAlign: 'end' },
@@ -145,12 +142,12 @@ export default function TalentMapList({ talents = [] }) {
             style={{
               backgroundColor:
                 talentSelectedLocation === talent.location
-                  ? theme.palette.background.ligth
-                  : theme.palette.background.default,
+                  && theme.palette.background.ligth
+                  
             }}
             component="div"
             variant="caption"
-            onMouseOver={() => handleSelectTalent(talent.location)}
+            onClick={() => handleSelectTalent(talent.location)}
           >
             <div className={classes.info}>
               <Box fontWeight={600}>{talent?.name}</Box>

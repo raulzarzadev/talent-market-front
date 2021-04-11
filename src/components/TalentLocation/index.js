@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core'
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
 const useStyles = makeStyles((theme) => ({}))
 export default function TalentLocation({ location, handleSetLocation }) {
+
+
   const classes = useStyles()
   const mapContainer = useRef()
   let centermarker

@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from 'react'
 import postFetch from '@src/helpers/postFetch'
 import TalentLocation from '@comps/TalentLocation'
 import DEFAULT_LOCATION from 'HARD-DATA/DEFAULT_LOCATION' // CDMX
+import Alert from '@material-ui/lab/Alert'
+import { useRouter } from 'next/router'
 
 const useStyles = makeStyles((theme) => ({
   imageSize: {
@@ -59,15 +61,32 @@ export default function TalentForm({ talent }) {
       console.log(res)
     )
   } */
+  const router = useRouter()
+  const [alert, setAlert] = useState(null)
+  const alertSuccessAndRedirect = () => {
+    setLoading(false)
+    setAlert(<Alert severity="success">Talent created successfully</Alert>)
+    setForm({})
+    setTimeout(() => {
+      router.push('/dashboard/market')
+    }, 300)
+  }
   const handleSave = () => {
+    setLoading(true)
     if (talent?._id) {
-      postFetch(`/talent/${talent._id}`, { rol: ['recruit'], ...form }, 'PUT')
+      postFetch(
+        `/talent/${talent._id}`,
+        { rol: ['recruit'], ...form },
+        'PUT'
+      ).then(alertSuccessAndRedirect)
     } else {
-      postFetch('/talent', { rol: ['recruit'], ...form })
+      postFetch('/talent', { rol: ['recruit'], ...form }).then(
+        alertSuccessAndRedirect
+      )
     }
   }
   const handleDescart = () => {
-    console.log('descart')
+    setForm({})
   }
   const handleChangeTab = (tab) => {
     setTabSelected(tab)
@@ -82,14 +101,16 @@ export default function TalentForm({ talent }) {
 
   const [editing, setEditing] = useState(false)
 
-  const handleSetLocation = (newLocation) => {
+  const handleSetLocation = (location) => {
     setEditing(true)
-    setForm({ ...form, location: newLocation })
+    setForm({ ...form, location })
   }
 
-  
+  const [loading, setLoading] = useState()
+
+  const isDisabled = !editing || loading || form?.name?.length < 1
   const locationIsValid = form?.location?.length === 2
-  if (!locationIsValid) setForm({ ...form, location: DEFAULT_LOCATION }) 
+  if (!locationIsValid) setForm({ ...form, location: DEFAULT_LOCATION })
 
   return (
     <div className={classes.talentForm}>
@@ -103,7 +124,7 @@ export default function TalentForm({ talent }) {
             variant="contained"
             color="primary"
             fullWidth
-            disabled={!editing}
+            disabled={isDisabled}
           >
             Save
           </Button>
@@ -135,7 +156,9 @@ export default function TalentForm({ talent }) {
           </Button>
         </Box>
       </div>
+
       <div>
+        {alert}
         <Grid item xs={12} className={classes.tabs}>
           <div
             onClick={() => handleChangeTab('profile')}
