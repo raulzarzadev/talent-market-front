@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import ModalMaterial from '@material-ui/core/Modal'
 import { IconButton, Paper, Typography } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
-
+import PropTypes from 'prop-types'
 const height = 'auto'
 const width = '550px'
 const useStyles = makeStyles((theme) => ({
@@ -57,4 +57,11 @@ export default function Modal({ handleClose, open = false, children, title }) {
       </Paper>
     </ModalMaterial>
   )
+}
+
+Modal.propTypes = {
+  handleClose: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
 }

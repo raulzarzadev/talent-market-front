@@ -49,7 +49,6 @@ export default function UserPage({ user, recruiter = false }) {
     'user',
     user
   ) */
-  if (!user) return 'Loading ...'
   return (
     <UserView
       user={user}

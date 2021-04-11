@@ -2,8 +2,10 @@ import WriteTalentProfile from '@comps/WriteTalentProfile'
 import SendToCoachModal from '@comps/Modals/SendToCoachModal'
 import { Avatar, Box, Button, Grid, makeStyles } from '@material-ui/core'
 import theme from '@src/theme'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import postFetch from '@src/helpers/postFetch'
+import TalentLocation from '@comps/TalentLocation'
+import DEFAULT_LOCATION from 'HARD-DATA/DEFAULT_LOCATION' // CDMX
 
 const useStyles = makeStyles((theme) => ({
   imageSize: {
@@ -29,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function TalentForm({ talent  }) {
+export default function TalentForm({ talent }) {
   const classes = useStyles()
 
   useEffect(() => {
@@ -43,22 +45,26 @@ export default function TalentForm({ talent  }) {
   }, [talent])
 
   const handleChange = (e) => {
+    setEditing(true)
     setForm({ ...form, [e.target.name]: e.target.value })
   }
   const handleSelectFile = (e) => {
+    setEditing(true)
     console.log(e.target, 'hola')
     setFiles({ ...files, [e.target.name]: e.target.files[0] })
   }
-  const handleSendCouch = () => {
-    handleOpenSendCoachModal()
-    postFetch('/talent', { rol: ['recruit'], ...form }).then((res) =>
+  /*   const handleSendCouch = () => {
+    handleOpenSendCoachModal(sendToCoachModal)
+     // postFetch('/talent', { rol: ['recruit'], ...form }).then((res) =>
       console.log(res)
     )
-    console.log('sendCouch')
-  }
-  const handleSaveDraft = () => {
-    postFetch('/talent', { rol: ['recruit'], ...form })
-    console.log('save draft')
+  } */
+  const handleSave = () => {
+    if (talent?._id) {
+      postFetch(`/talent/${talent._id}`, { rol: ['recruit'], ...form }, 'PUT')
+    } else {
+      postFetch('/talent', { rol: ['recruit'], ...form })
+    }
   }
   const handleDescart = () => {
     console.log('descart')
@@ -68,13 +74,23 @@ export default function TalentForm({ talent  }) {
   }
   const handleOpenSendCoachModal = () => {
     setSendToCoachModal(!sendToCoachModal)
-    console.log('modal')
   }
   const [sendToCoachModal, setSendToCoachModal] = useState(false)
   const [form, setForm] = useState({})
   const [files, setFiles] = useState({})
   const [tabSelected, setTabSelected] = useState('profile')
-  console.log(form)
+
+  const [editing, setEditing] = useState(false)
+
+  const handleSetLocation = (newLocation) => {
+    setEditing(true)
+    setForm({ ...form, location: newLocation })
+  }
+
+  
+  const locationIsValid = form?.location?.length === 2
+  if (!locationIsValid) setForm({ ...form, location: DEFAULT_LOCATION }) 
+
   return (
     <div className={classes.talentForm}>
       <div className={classes.talentImage}>
@@ -83,19 +99,35 @@ export default function TalentForm({ talent  }) {
         </Box>
         <Box marginY={4}>
           <Button
-            onClick={handleSaveDraft}
+            onClick={handleSave}
             variant="contained"
             color="primary"
             fullWidth
-            disabled
+            disabled={!editing}
           >
-            Save as draft
+            Save
           </Button>
         </Box>
         <Box marginY={4} onClick={handleOpenSendCoachModal}>
           <Button variant="contained" color="primary" fullWidth>
             Save and send couch
           </Button>
+        </Box>
+        <Box marginY={4}>
+          <TalentLocation
+            location={form?.location}
+            handleSetLocation={handleSetLocation}
+          />
+          {/*  <Box mt={1}>
+            <Button
+              onClick={handleSave}
+              variant="contained"
+              color="primary"
+              fullWidth
+            >
+              Set location
+            </Button>
+          </Box> */}
         </Box>
         <Box marginY={4} onClick={handleDescart}>
           <Button variant="outlined" fullWidth>
@@ -145,10 +177,11 @@ export default function TalentForm({ talent  }) {
           />
         )}
       </div>
+
       <SendToCoachModal
         open={sendToCoachModal}
         handleClose={handleOpenSendCoachModal}
-        handleSend={handleSendCouch}
+        // handleSend={handleSendCouch}
         handleChange={handleChange}
         form={form}
       />

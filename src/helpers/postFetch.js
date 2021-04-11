@@ -1,7 +1,7 @@
-export default async function postFetch(url, data) {
+export default async function postFetch(url, data, method='POST') {
   const api = process.env.NEXT_PUBLIC_URL_API
   return await fetch(`${api}${url}`, {
-    method: 'POST',
+    method: method,
     body: JSON.stringify(data),
     headers: {
       'Content-Type': 'application/json',

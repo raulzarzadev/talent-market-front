@@ -31,7 +31,7 @@ function DashboardMain() {
   return (
     <div className={classes.menu}>
       {buttons.map((button) => (
-        <Box m={2} width="90%" maxWidth={450}>
+        <Box m={2} width="90%" maxWidth={450} key={button.label}>
           <ButtonLink
             fullWidth
             href={button.href}

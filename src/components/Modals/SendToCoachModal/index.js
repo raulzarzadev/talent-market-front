@@ -6,10 +6,10 @@ import normalizeToSelectOptions from '@src/helpers/normalizeToSelectOptions'
 import { useEffect, useState } from 'react'
 
 export default function SendToCoachModal({
-  open,
+  open=false,
   handleClose,
   handleChange,
-  handleSend,
+  // handleSend,
   form,
 }) {
   const [coaches, setCoaches] = useState([])
@@ -31,6 +31,7 @@ export default function SendToCoachModal({
 
   return (
     <Modal
+      title="Send to coach"
       open={open}
       handleClose={handleClose}
       aria-labelledby="simple-modal-title"
@@ -58,8 +59,8 @@ export default function SendToCoachModal({
           />
         </Box>
         <Box p={2} width="auto" display="flex" justifyContent="flex-end">
-          <Button variant="contained" color="primary" onClick={handleSend}>
-            Send
+          <Button variant="contained" color="primary" onClick={handleClose}>
+            Close
           </Button>
         </Box>
       </div>

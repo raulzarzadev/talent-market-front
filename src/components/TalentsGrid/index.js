@@ -60,6 +60,7 @@ const rows = [
 ]
 
 export default function TalentGrid({ paddingTable, talents }) {
+  console.log(talents)
   const classes = useStyles()
   return (
     <Grid container style={{ paddingLeft: 20 }}>
@@ -126,7 +127,7 @@ export default function TalentGrid({ paddingTable, talents }) {
                 <Typography variant="caption">{salary}</Typography>
               </Grid>
               <Grid item xs={12} sm={1} className={classes.cell}>
-                <Typography variant="caption">{location}</Typography>
+                {/* <Typography variant="caption">{location}</Typography> */}
               </Grid>
               <Grid item xs={12} sm={true} className={classes.cell}>
                 <ButtonLink variant="outlined" href={`/dashboard/market/${_id}`}>

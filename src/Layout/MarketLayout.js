@@ -1,7 +1,6 @@
-import { Box, Button, makeStyles, Typography } from '@material-ui/core'
+import { Button, makeStyles } from '@material-ui/core'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
-import Circle from '@comps/Circle'
-import TalentsGrid from '@comps/TalentsGrid'
+
 import Link from '@comps/Link'
 import MarketTitle from '@comps/MarketTitle'
 
@@ -21,7 +20,12 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2, 0),
   },
 }))
-export default function MarketLayout({ Component, title, hideButtom,...props }) {
+export default function MarketLayout({
+  Component,
+  title,
+  hideButtom,
+  ...props
+}) {
   const classes = useStyles()
   return (
     <div className={classes.market}>

@@ -15,7 +15,7 @@ a {
   box-sizing: border-box;
 }
 
-.center{
+.center {
   background-color: blue;
 }
 
@@ -28,4 +28,15 @@ a {
 .column {
   display: flex;
   flex-direction: column;
+}
+
+.marker > .mapboxgl-popup-content {
+  padding: 0;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.marker > .mapboxgl-popup-tip {
 }

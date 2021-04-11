@@ -1,9 +1,9 @@
-export default function Divider({ orientation = 'vertical' }) {
+export default function Divider({ orientation = 'vertical', width = '5px' }) {
   if (orientation === 'horizontal')
     return (
       <div
         style={{
-          borderLeft: '5px solid #fff',
+          borderLeft:`${width} solid #fff`,
           height: 2,
           alignSelf: 'center',
         }}
