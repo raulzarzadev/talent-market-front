@@ -10,10 +10,17 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: theme.spacing(1),
     padding: theme.spacing(1),
     backgroundColor: theme.palette.background.dark,
+    flexDirection: 'column',
+    [theme.breakpoints.up('md')]: {
+      flexDirection: 'row',
+    },
   },
   profileView: {
-    minWidth: 300,
     width: '50%',
+    minWidth: 200,
+    [theme.breakpoints.up('md')]: {
+      minWidth: 300,
+    },
   },
 }))
 export default function UserView({

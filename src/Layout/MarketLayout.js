@@ -8,15 +8,21 @@ const paddingMarket = '3rem'
 const paddingTable = 40
 const useStyles = makeStyles((theme) => ({
   market: {
-    padding: '2rem',
     paddingTop: 0,
     [theme.breakpoints.up('sm')]: {
+      padding: '2rem',
       padding: paddingMarket,
     },
   },
   marketNav: {
     display: 'flex',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
     margin: theme.spacing(2, 0),
   },
 }))

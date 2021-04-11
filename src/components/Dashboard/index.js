@@ -23,7 +23,8 @@ import AdvanceSearch from '@comps/AdvanceSearch'
 import { Button } from '@material-ui/core'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import Clock from '@comps/Clock'
-const drawerWidth = 180
+
+const drawerWidth = 75
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,10 +39,17 @@ const useStyles = makeStyles((theme) => ({
     }),
     background: theme.palette.background.default,
     width: `calc(100% - ${drawerWidth}px)`,
+    [theme.breakpoints.up('md')]: {
+      width: `calc(100% - ${drawerWidth * 2}px)`,
+    },
   },
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
+    [theme.breakpoints.up('md')]: {
+      marginLeft: drawerWidth * 2,
+      width: `calc(100% - ${drawerWidth * 2}px)`,
+    },
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -54,7 +62,12 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
   },
   drawer: {
-    width: drawerWidth,
+    display: 'none',
+    width: 'auto',
+    maxWidth: drawerWidth,
+    [theme.breakpoints.up('md')]: {
+      maxWidth: drawerWidth * 2,
+    },
     flexShrink: 0,
     whiteSpace: 'nowrap',
     backgroundColor: theme.palette.background.dark,
@@ -63,25 +76,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    backgroundColor: theme.palette.background.dark,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
-    },
-  },
+
   toolbar_search: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -100,6 +95,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     backgroundColor: theme.palette.background.default,
     paddingLeft: drawerWidth,
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: drawerWidth * 2,
+    },
   },
   listItemIcon: {
     color: '#fff',
@@ -108,6 +106,10 @@ const useStyles = makeStyles((theme) => ({
   },
   listItem: {
     color: '#fff',
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
+    },
   },
   searchBar: {
     backgroundColor: theme.palette.background.ligth,
@@ -124,7 +126,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   clockContent: {
-    paddingBottom: theme.spacing(10),
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
+      paddingBottom: theme.spacing(10),
+    },
   },
 }))
 

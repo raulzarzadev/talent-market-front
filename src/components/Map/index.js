@@ -15,25 +15,49 @@ const useStyles = makeStyles((theme) => ({
   mapPage: {
     display: 'flex',
     position: 'relative',
+    flexDirection: 'column',
+    [theme.breakpoints.up('md')]: {
+      flexDirection: 'row',
+    },
   },
   header: {
-    position: 'absolute',
-    height: headerHeight,
-    top: 0,
-    left: 0,
-    right: 0,
     display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 2),
+    flexDirection: 'column',
+    [theme.breakpoints.up('md')]: {
+      flexDirection: 'row',
+      position: 'absolute',
+      height: headerHeight,
+      top: 0,
+      left: 0,
+      right: 0,
+      alignItems: 'center',
+      padding: theme.spacing(0, 2),
+    },
   },
   filterItem: {
-    margin: theme.spacing(1, 0),
+    display: 'flex',
+    justifyContent: 'center',
+    [theme.breakpoints.up('md')]: {
+      margin: theme.spacing(1, 0),
+    },
+  },
+  divider: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignContent: 'center',
+    justifyContent: 'space-evenly',
   },
   sideList: {
     marginTop: headerHeight,
-    minWidth: 250,
-    maxHeight: '600px',
+    display: 'flex',
+    maxWidth: '100%',
     overflow: 'auto',
+    [theme.breakpoints.up('md')]: {
+      flexDirection: 'column',
+    },
+    //minWidth: 250,
+    //maxHeight: '600px',
+    //overflow: 'auto',
   },
   talent: {
     display: 'flex',
@@ -50,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
   contact: { textAlign: 'end' },
   map: {
     marginTop: headerHeight,
+    margin: '0 auto',
   },
 }))
 
@@ -156,7 +181,7 @@ export default function Map({ talents }) {
             </div>
           </Typography>
         ))}
-        <Box display="flex" justifyContent="space-evenly">
+        <Box className={classes.divider}>
           {`Without location `}
           <Divider orientation="horizontal" width="60px" />
         </Box>

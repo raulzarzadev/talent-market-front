@@ -48,10 +48,6 @@ const getCurrectTime = () => {
 const useStyles = makeStyles((theme) => ({
   clock: {
     textAlign: 'center',
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
   },
 }))
 
