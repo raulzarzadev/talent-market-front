@@ -33,13 +33,12 @@ export default function Map({
     const spilted = name.split(' ')
     const word1 = spilted[0][0]
     const word2 = spilted[1]?.[0] || spilted[0][1]
-    console.log(word1, word2)
-    return `${word1.toUpperCase()} ${word2.toUpperCase()}`
+    return `${word1?.toUpperCase() || 'A'} ${word2?.toUpperCase() || 'B'}`
   }
   const talentsDescription = (name = '') => {
     console.log(name)
 
-    return name.toLowerCase()
+    return name?.toLowerCase() || 'no name'
   }
   useEffect(() => {
     var map = new mapboxgl.Map({
@@ -50,10 +49,19 @@ export default function Map({
     })
     map.on('load', () => {
       markers.map((talent) => {
+        /* ---------------------------- */
+        /* ----Create custom marker---- */
+        /* ---------------------------- */
         const defaultMarker = document.createElement('div')
+        /* ---------------------------- */
+        /* ----Asign a global class ---- */
+        /* ---------------------------- */
         defaultMarker.className = 'mapbox-custom-marker'
         defaultMarker.style.backgroundColor = theme.palette.background.default
         defaultMarker.innerHTML = `${talentsInitals(talent.name)}`
+        /* ----------------------------------------- */
+        /* ----Listeners for to change inner Text ---- */
+        /* ----------------------------------------- */
         defaultMarker.addEventListener('mouseenter', function () {
           handleSelectTalent(talent.location)
           defaultMarker.innerHTML = `${talentsDescription(talent.name)}`
@@ -65,30 +73,12 @@ export default function Map({
           defaultMarker.style.backgroundColor = theme.palette.background.default
         })
 
-        /* const markerHover = document.createElement('div')
-        markerHover.className = 'marker-3'
-        markerHover.style.width = '80px'
-        markerHover.style.height = '50px'
-        markerHover.style.backgroundSize = '100%'
-        markerHover.innerHTML = `<h3>hola</h3>`
- */
         let mark = new mapboxgl.Marker(defaultMarker)
           .setLngLat(talent.location)
           .addTo(map)
-
-        /*  defaultMarker.addEventListener('mouseenter', function () {
-          mark.remove()
-          let hover = new mapboxgl.Marker(markerHover)
-            .setLngLat(talent.location)
-            .addTo(map)
-          markerHover.addEventListener('mouseout', function () {
-            mark.addTo(map)
-            hover.remove()
-          })
-        }) */
       })
     })
-  }, [markers.length, talentSelectedLocation])
+  }, [markers.length])
 
   return (
     <div
