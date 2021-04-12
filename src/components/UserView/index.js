@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   profileView: {
     width: '50%',
+    paddingBottom: '2rem',
     minWidth: 200,
     [theme.breakpoints.up('md')]: {
       minWidth: 300,
