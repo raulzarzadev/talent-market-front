@@ -23,6 +23,7 @@ import AdvanceSearch from '@comps/AdvanceSearch'
 import { Button } from '@material-ui/core'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import Clock from '@comps/Clock'
+import ButtonLink from '@comps/Link/ButtonLink'
 
 const drawerWidth = 75
 
@@ -197,7 +198,9 @@ export default function Dashboard({ children }) {
         <Drawer variant="permanent" classes={{ paper: classes.drawer }}>
           <div>
             <div className={classes.navIcon}>
-              <img src="/assets/group_icon.svg" width="50px" height="50px" />
+              <ButtonLink href='/'>
+                <img src="/assets/group_icon.svg" width="50px" height="50px" />
+              </ButtonLink>
             </div>
             <List>
               {menuItems.map(({ label, icon, disabled, href }, i) => (
