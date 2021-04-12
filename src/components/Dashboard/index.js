@@ -9,14 +9,9 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 
-import WorkIcon from '@material-ui/icons/Work'
-import MapIcon from '@material-ui/icons/Map'
-
 import SearchBar from '@comps/SearchBar'
 import Footer from '@comps/Footer'
 import Link from '@comps/Link'
-import DataUsageIcon from '@material-ui/icons/DataUsage'
-import GroupIcon from '@material-ui/icons/Group'
 import { useRouter } from 'next/router'
 import theme from '@src/theme'
 import AdvanceSearch from '@comps/AdvanceSearch'
@@ -25,6 +20,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import Clock from '@comps/Clock'
 import ButtonLink from '@comps/Link/ButtonLink'
 import Head from 'next/head'
+import menuItems from './menuItems'
 
 const drawerWidth = 75
 
@@ -136,32 +132,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const menuItems = [
-  {
-    label: 'Dashboard',
-    disabled: false,
-    icon: <DataUsageIcon />,
-    href: '/dashboard',
-  },
-  {
-    label: 'Job Orders',
-    disabled: true,
-    icon: <WorkIcon />,
-    href: '/',
-  },
-  {
-    label: 'Market',
-    disabled: false,
-    icon: <GroupIcon />,
-    href: '/dashboard/market',
-  },
-  {
-    label: 'Map',
-    disabled: false,
-    icon: <MapIcon />,
-    href: '/dashboard/map',
-  },
-]
 export default function Dashboard({ children }) {
   const classes = useStyles()
   const { route, back } = useRouter()
@@ -207,8 +177,11 @@ export default function Dashboard({ children }) {
               </ButtonLink>
             </div>
             <List>
+              {/* ------------------------
+              ----------Imported from menuItem file in ./ --------------
+              --------------------------*/}
               {menuItems.map(({ label, icon, disabled, href }, i) => (
-                <Link href={href} key={i}>
+                <Link href={disabled ? '' : href} key={i}>
                   <ListItem
                     button
                     disabled={disabled}

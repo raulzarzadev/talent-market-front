@@ -8,11 +8,11 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
   },
 }))
-export default function Link({ children, href }) {
+export default function Link({ children, href, disabled }) {
   const classes = useStyles()
 
   return (
-    <NextLink href={href}>
+    <NextLink href={disabled ? '' : href}>
       <a className={classes.link}>{children}</a>
     </NextLink>
   )

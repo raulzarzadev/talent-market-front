@@ -1,6 +1,7 @@
 import NewTalent from '@comps/NewTalent'
 import fetching from '@src/helpers/fetching'
 import Layout from '@src/Layout'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 export default function MarketNew() {

@@ -1,11 +1,4 @@
-import Divider from '@comps/Divider'
-import {
-  Box,
-  Checkbox,
-  FormControlLabel,
-  makeStyles,
-  Typography,
-} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
 import theme from '@src/theme'
 import DEFAULT_LOCATION from 'HARD-DATA/DEFAULT_LOCATION'
 import { useEffect } from 'react'
@@ -63,7 +56,7 @@ export default function Map({
         /* ----Listeners for to change inner Text ---- */
         /* ----------------------------------------- */
         defaultMarker.addEventListener('mouseenter', function () {
-          handleSelectTalent(talent.location)
+          // handleSelectTalent(talent.location)
           defaultMarker.innerHTML = `${talentsDescription(talent.name)}`
           defaultMarker.style.backgroundColor = theme.palette.primary.main
         })
@@ -78,12 +71,12 @@ export default function Map({
           .addTo(map)
       })
     })
-  }, [markers.length])
+  }, [markers.length, talentSelectedLocation])
 
   return (
     <div
       className={classes.map}
-      style={{ width: '90%', height: 700, border: '1px solid' }}
+      style={{ width: '90%', height: '70vh', border: '1px solid' }}
       id="list-talent-map-container"
     ></div>
   )

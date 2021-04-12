@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     maxWidth: '100%',
     overflow: 'auto',
+    maxHeight:'70vh',
     [theme.breakpoints.up('md')]: {
       flexDirection: 'column',
     },
