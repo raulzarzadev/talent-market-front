@@ -2,6 +2,7 @@ import ButtonLink from '@comps/Link/ButtonLink'
 import NewUserModal from '@comps/Modals/NewUserModal'
 import { Box, Button, makeStyles } from '@material-ui/core'
 import Layout from '@src/Layout'
+import Head from 'next/head'
 import { useState } from 'react'
 
 export default function Dasboard() {
@@ -29,30 +30,35 @@ function DashboardMain() {
     { href: '/dashboard/recruiters', label: 'Recruiters View' },
   ]
   return (
-    <div className={classes.menu}>
-      {buttons.map((button) => (
-        <Box m={2} width="90%" maxWidth={450} key={button.label}>
-          <ButtonLink
-            fullWidth
-            href={button.href}
-            color="primary"
-            variant="contained"
-          >
-            {button.label}
-          </ButtonLink>
-        </Box>
-      ))}
+    <>
+      <Head>
+        <title>Dashboard - Talent Market</title>
+      </Head>
+      <div className={classes.menu}>
+        {buttons.map((button) => (
+          <Box m={2} width="90%" maxWidth={450} key={button.label}>
+            <ButtonLink
+              fullWidth
+              href={button.href}
+              color="primary"
+              variant="contained"
+            >
+              {button.label}
+            </ButtonLink>
+          </Box>
+        ))}
 
-      <Box m={2}>
-        <Button
-          color="secondary"
-          variant="contained"
-          onClick={handleOpenNewUser}
-        >
-          New User
-        </Button>
-      </Box>
-      <NewUserModal open={openModalNewUser} handleClose={handleOpenNewUser} />
-    </div>
+        <Box m={2}>
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={handleOpenNewUser}
+          >
+            New User
+          </Button>
+        </Box>
+        <NewUserModal open={openModalNewUser} handleClose={handleOpenNewUser} />
+      </div>
+    </>
   )
 }

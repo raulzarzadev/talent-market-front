@@ -14,5 +14,12 @@ export default function MarketNew() {
     }
   }, [id])
   console.log(talent)
-  return <Layout Component={NewTalent} title='Edit Talent' talent={talent} />
+  return (
+    <>
+      <Head>
+        <title>Edit Talent - Talent Market</title>
+      </Head>
+      <Layout Component={NewTalent} title="Edit Talent" talent={talent} />
+    </>
+  )
 }

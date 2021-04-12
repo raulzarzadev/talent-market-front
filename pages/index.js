@@ -6,8 +6,11 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Home - Talent Market</title>
+        <link rel="icon" href="/assets/group_icon.svg" />
+        <meta name="robots" content="noindex" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="description" content="Talent Market is just a page test." />
       </Head>
       <div className="flex-center" style={{ minHeight: 500 }}>
         <main className={styles.main}>
@@ -17,7 +20,9 @@ export default function Home() {
         </main>
       </div>
 
-      <footer className={styles.footer}>Una app maquetada por <a href='https://raulzarza.com'>RZ</a> </footer>
+      <footer className={styles.footer}>
+        Una app maquetada por <a href="https://raulzarza.com">RZ</a>{' '}
+      </footer>
     </div>
   )
 }

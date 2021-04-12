@@ -24,6 +24,7 @@ import { Button } from '@material-ui/core'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import Clock from '@comps/Clock'
 import ButtonLink from '@comps/Link/ButtonLink'
+import Head from 'next/head'
 
 const drawerWidth = 75
 
@@ -170,6 +171,9 @@ export default function Dashboard({ children }) {
   const isLocatedIn = (href) => href === route
   return (
     <>
+      <Head>
+        <link rel="icon" href="/assets/group_icon.svg" />
+      </Head>
       <div className={classes.root}>
         <CssBaseline />
         <AppBar position="fixed" className={classes.appBar}>
@@ -198,7 +202,7 @@ export default function Dashboard({ children }) {
         <Drawer variant="permanent" classes={{ paper: classes.drawer }}>
           <div>
             <div className={classes.navIcon}>
-              <ButtonLink href='/'>
+              <ButtonLink href="/">
                 <img src="/assets/group_icon.svg" width="50px" height="50px" />
               </ButtonLink>
             </div>

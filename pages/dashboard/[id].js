@@ -1,6 +1,7 @@
 import UserPage from '@comps/UserPage'
 import fetching from '@src/helpers/fetching'
 import Layout from '@src/Layout'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
@@ -16,5 +17,12 @@ export default function User() {
 
   if (user === undefined) return 'Loading ...'
 
-  return <Layout Component={UserPage} user={user} />
+  return (
+    <>
+      <Head>
+        <title>User Details - Talent Market</title>
+      </Head>
+      <Layout Component={UserPage} user={user} />
+    </>
+  )
 }
