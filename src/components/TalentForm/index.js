@@ -53,6 +53,10 @@ export default function TalentForm({ talent }) {
   const handleSelectFile = (e) => {
     setEditing(true)
     console.log(e.target, 'hola')
+    console.log(e.target.value, 'hola')
+    console.log(e.target.file, 'hola')
+    console.log(e.target.files, 'hola')
+    console.log(e.target.name, 'hola')
     setFiles({ ...files, [e.target.name]: e.target.files[0] })
   }
   /*   const handleSendCouch = () => {
@@ -85,6 +89,7 @@ export default function TalentForm({ talent }) {
       )
     }
   }
+
   const handleDescart = () => {
     setForm({})
   }

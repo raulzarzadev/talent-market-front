@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0.5),
     background: theme.palette.background.default,
     marginTop: theme.spacing(1),
+    '&:disabled': {
+      background: 'red',
+    },
   },
   toplabel: {
     color: theme.palette.text.labelligth,
@@ -32,16 +35,19 @@ export default function MaterialSelectField({
   onChange = () => {},
   options = [],
   toplabel,
+  disabled,
   ...rest
 }) {
   const classes = useStyles()
 
   if (toplabel)
     return (
-      <FormControl fullWidth>
+      <FormControl fullWidth style={{ opacity: disabled && '0.4' }} >
         <FormLabel className={classes.toplabel}>
           {toplabel}
           <Select
+          
+            disabled={disabled}
             fullWidth
             value={value}
             displayEmpty
@@ -71,6 +77,8 @@ export default function MaterialSelectField({
 
   return (
     <Select
+      style={{ opacity: disabled && '0.4' }}
+      disabled={disabled}
       value={value}
       displayEmpty
       onChange={onChange}
@@ -99,12 +107,7 @@ MaterialSelectField.propTypes = {
   placeholder: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  /* options: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    })
-  ).isRequired, */
+
   toplabel: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 }

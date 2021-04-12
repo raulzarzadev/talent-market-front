@@ -7,23 +7,33 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     background: theme.palette.background.default,
     '&::placeholder': {
-      color:  theme.palette.text.primary,
+      color: theme.palette.text.primary,
     },
   },
-  toplabel:{
+  toplabel: {
     color: theme.palette.text.labelligth,
-    paddingBottom: theme.spacing(1)
+    paddingBottom: theme.spacing(1),
   },
-  
 }))
 
-export default function MaterialTextField({ children, toplabel, ...rest }) {
+export default function MaterialTextField({
+  children,
+  toplabel,
+  disabled,
+  focused,
+  ...rest
+}) {
   const classes = useStyles()
   if (toplabel)
     return (
-      <FormControl fullWidth>
-        <FormLabel className={classes.toplabel} >{toplabel }</FormLabel>
+      <FormControl
+        fullWidth
+        style={{ opacity: disabled && '0.3' }}
+        focused={focused}
+      >
+        <FormLabel className={classes.toplabel}>{toplabel}</FormLabel>
         <TextField
+          disabled={disabled}
           margin="none"
           size="small"
           {...rest}
@@ -38,6 +48,9 @@ export default function MaterialTextField({ children, toplabel, ...rest }) {
     )
   return (
     <TextField
+      focused={focused}
+      style={{ opacity: disabled && '0.3' }}
+      disabled={disabled}
       margin="none"
       size="small"
       {...rest}

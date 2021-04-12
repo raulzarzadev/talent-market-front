@@ -9,6 +9,11 @@ export default function Recruiters() {
     fetching('/talent?rol=recruiter').then(setUsers)
   }, [])
   return (
-    <Layout Component={SelectUser} users={users} title="Recruiters" />
+    <Layout
+      Component={SelectUser}
+      users={users}
+      title="Recruiters"
+      isRecruiter
+    />
   )
 }

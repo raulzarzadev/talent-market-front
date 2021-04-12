@@ -15,6 +15,7 @@ const inputs = [
     placeholder: 'Text',
     inputName: 'name',
     disabled: false,
+    focused: true,
   },
   {
     type: 'text',
@@ -154,6 +155,7 @@ export default function WriteTalentProfile({
             label,
             placeholder,
             disabled,
+            focused,
           }) => (
             <Grid
               key={label}
@@ -165,6 +167,7 @@ export default function WriteTalentProfile({
             >
               {type === 'select' && (
                 <MaterialSelectField
+                  focused={focused}
                   disabled={disabled}
                   name={inputName}
                   onChange={handleChange}
@@ -176,6 +179,7 @@ export default function WriteTalentProfile({
               )}
               {type === 'text' && (
                 <MaterialTextField
+                  focused={focused}
                   disabled={disabled}
                   name={inputName}
                   value={form[inputName] || ''}
@@ -192,6 +196,7 @@ export default function WriteTalentProfile({
         <Grid item xs={12} className={classes.cell}>
           <Typography variant="h6">Attachments</Typography>
         </Grid>
+        {console.log(files['coverLetter'])}
         {inputFiles?.map(({ inputName, label }) => (
           <Grid key={label} item xs={12} className={classes.cell}>
             <Box display="flex" justifyContent="space-between">
@@ -207,7 +212,7 @@ export default function WriteTalentProfile({
               </Typography>
               <label htmlFor={`btn-upload-${inputName}`}>
                 <input
-                  value={files[inputName] || ''}
+                  // value={files[inputName] || ''}
                   id={`btn-upload-${inputName}`}
                   name={inputName}
                   style={{ display: 'none' }}

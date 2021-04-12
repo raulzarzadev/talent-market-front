@@ -2,7 +2,7 @@ import UserView from '@comps/UserView'
 import fetching from '@src/helpers/fetching'
 import { useEffect, useState } from 'react'
 
-export default function UserPage({ user, recruiter = false }) {
+export default function UserPage({ user }) {
   // GET user who is this user assigned for // BOSS
 
   const [assignedTo, setAssignedTo] = useState(null)
@@ -31,12 +31,11 @@ export default function UserPage({ user, recruiter = false }) {
     }
   }, [user])
   const [recruiters, setRecruiters] = useState([])
-  console.log(recruiters, assignments)
-   
-
+ 
+  const { rol } = user
   useEffect(() => {
-    if (recruiter) {
-      // if is a recruiter overwrite recruites 
+    if (rol?.includes('recruiter')) {
+      // if is a recruiter overwrite recruites
       fetching(`/talent?recruitedBy=${user._id}`).then(setRecruiters)
     }
   }, [user])
@@ -55,7 +54,6 @@ export default function UserPage({ user, recruiter = false }) {
       assignedTo={assignedTo}
       assignments={assignments}
       recruiters={recruiters}
-      recruiter={recruiter}
     />
   )
 }

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 export default function User() {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(undefined)
   const {
     query: { id },
   } = useRouter()
@@ -13,7 +13,8 @@ export default function User() {
   useEffect(() => {
     fetching(`/talent?_id=${id}`).then((res) => setUser(res[0]))
   }, [id])
-  const isRecruiter = user?.rol?.includes('recruiter')
 
-  return <Layout Component={UserPage} user={user} recruiter={isRecruiter} />
+  if (user === undefined) return 'Loading ...'
+
+  return <Layout Component={UserPage} user={user} />
 }

@@ -26,10 +26,12 @@ const useStyles = makeStyles((theme) => ({
 export default function UserView({
   user = {},
   assignedTo = null,
-  recruiter = false,
   assignments = [],
   recruiters = [],
 }) {
+  console.log(recruiters, assignments)
+  const isCoach = user?.rol?.includes('coach')
+  const isRecruiter = user?.rol?.includes('recruiter')
   const classes = useStyles()
   return (
     <div className="flex-center column">
@@ -57,7 +59,7 @@ export default function UserView({
           classes={classes}
         />
 
-        {!recruiter && (
+        {isRecruiter || (
           <TalentsList
             title="Assignments"
             emptyLabel="No Assignments yet"
@@ -66,13 +68,24 @@ export default function UserView({
           />
         )}
 
-        <TalentsList
-          title="Recruites"
-          emptyLabel="No Recruites yet"
-          talents={recruiters}
-          classes={classes}
-          recruiter
-        />
+        {isRecruiter && (
+          <TalentsList
+            title="Talent recruitered"
+            emptyLabel="No talent recruiter yet"
+            talents={recruiters}
+            classes={classes}
+          />
+        )}
+
+        {isCoach && (
+          <TalentsList
+            title={`Team of ${user.name}`}
+            emptyLabel="No Recruites yet"
+            talents={recruiters}
+            classes={classes}
+            recruiter
+          />
+        )}
       </Typography>
     </div>
   )

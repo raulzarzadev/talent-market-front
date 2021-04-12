@@ -8,5 +8,5 @@ export default function Coachs() {
   useEffect(() => {
     fetching('/talent?rol=coach').then(setUsers)
   }, [])
-  return <Layout Component={SelectUser} users={users} title="Coaches" />
+  return <Layout Component={SelectUser} users={users} title="Coaches"  />
 }
