@@ -27,9 +27,9 @@ export default function UserView({
   user = {},
   assignedTo = null,
   assignments = [],
-  recruiters = [],
+  recruits = [],
 }) {
-  console.log(recruiters, assignments)
+  console.log(recruits, assignments)
   const isCoach = user?.rol?.includes('coach')
   const isRecruiter = user?.rol?.includes('recruiter')
   const classes = useStyles()
@@ -72,7 +72,7 @@ export default function UserView({
           <TalentsList
             title="Talent recruitered"
             emptyLabel="No talent recruiter yet"
-            talents={recruiters}
+            talents={recruits}
             classes={classes}
           />
         )}
@@ -81,7 +81,7 @@ export default function UserView({
           <TalentsList
             title={`Team of ${user.name}`}
             emptyLabel="No Recruites yet"
-            talents={recruiters}
+            talents={recruits}
             classes={classes}
             recruiter
           />

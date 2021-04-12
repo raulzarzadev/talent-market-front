@@ -24,19 +24,22 @@ export default function UserPage({ user }) {
       fetching(`/talent?assignedTo=${user._id}`).then((res) => {
         // just get diference bettewn recruits and bosses
         const bosses = res.filter((item) => !item.rol.includes('recruit'))
-        const recruiters = res.filter((item) => item.rol.includes('recruit'))
+        const recruits = res.filter((item) => item.rol.includes('recruit'))
         setAssignments(bosses)
-        setRecruiters(recruiters)
+        setRecruits(recruits)
       })
     }
   }, [user])
-  const [recruiters, setRecruiters] = useState([])
- 
-  const { rol } = user
+  const [recruits, setRecruits] = useState([])
+
+  // if user is a recruiter, get all talent that it was recruiter by them and overwrite the recruites
+  // TODO implement coachTeam otherside recruits
+
   useEffect(() => {
-    if (rol?.includes('recruiter')) {
-      // if is a recruiter overwrite recruites
-      fetching(`/talent?recruitedBy=${user._id}`).then(setRecruiters)
+    const { rol } = user
+    const isRecruiter = rol?.includes('recruiter')
+    if (isRecruiter) {
+      fetching(`/talent?recruitedBy=${user._id}`).then(setRecruits)
     }
   }, [user])
 
@@ -53,7 +56,7 @@ export default function UserPage({ user }) {
       user={user}
       assignedTo={assignedTo}
       assignments={assignments}
-      recruiters={recruiters}
+      recruits={recruits}
     />
   )
 }
