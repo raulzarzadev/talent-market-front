@@ -17,7 +17,7 @@ export default function Home() {
         </main>
       </div>
 
-      <footer className={styles.footer}>Una app maquetada por RZ</footer>
+      <footer className={styles.footer}>Una app maquetada por <a href='https://raulzarza.com'>RZ</a> </footer>
     </div>
   )
 }
