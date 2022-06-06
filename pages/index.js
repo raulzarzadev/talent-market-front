@@ -6,11 +6,11 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Home - Talent Market</title>
+        <title>Talent Market</title>
         <link rel="icon" href="/assets/group_icon.svg" />
         <meta name="robots" content="noindex" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="description" content="Talent Market is just a page test." />
+        <meta name="description" content="A simple dashboard to manage talent for a talent company. " />
       </Head>
       <div className="flex-center" style={{ minHeight: 500 }}>
         <main className={styles.main}>
